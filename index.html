@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Application Form</title>
+
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#86e6ec,#c39ee8);
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:650px;
+    background:#fff;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    animation:fadeIn 0.8s ease;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold;
+    color:#444;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:2px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+    transition:all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#667eea;
+    box-shadow:0 0 10px rgba(102,126,234,0.3);
+    outline:none;
+}
+
+.gender-group{
+    display:flex;
+    gap:15px;
+    margin-top:10px;
+}
+
+.gender-group input{
+    width:auto;
+}
+
+input[type="file"]{
+    padding:10px;
+    border:2px dashed #667eea;
+    background:#f8f9ff;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:25px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+button:active{
+    transform:scale(0.98);
+}
+
+#message{
+    text-align:center;
+    margin-top:15px;
+    color:green;
+    font-weight:bold;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Application Form</h2>
+
+    <form action="https://formspree.io/f/xykajeap" method="POST">
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="fullname" required>
+
+        <label for="dob">Date of Birth</label>
+       <input type="date" id="dob" name="dob" required>
+
+        <label>Gender</label>
+        <div class="gender-group">
+            <input type="radio" name="gender" value="Male" required> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other
+        </div>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="phone">Phone Number</label>
+       <input type="tel" id="phone" name="phone" required>
+
+        <label for="qualification">Professional Qualification</label>
+        <select id="qualification" name="qualification" required>
+            <option value="">Select Qualification</option>
+            <option>B.E / B.Tech</option>
+            <option>M.E / M.Tech</option>
+            <option>B.Sc</option>
+            <option>M.Sc</option>
+            <option>MCA</option>
+            <option>Diploma</option>
+            <option>Other</option>
+        </select>
+
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+        <label for="resume">Upload Resume (PDF only - Optional)</label>
+       <input type="file" id="resume" name="resume" accept=".pdf">
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <div id="message"></div>
+
+</div>
+
+<script>
+document.getElementById("applicationForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const resume = document.getElementById("resume");
+
+    if (resume.files.length > 0) {
+        const file = resume.files[0];
+
+        if (file.type !== "application/pdf") {
+            alert("Please upload a PDF file only.");
+            return;
+        }
+    }
+
+    document.getElementById("message").innerHTML =
+        "Form submitted successfully!";
+
+    document.getElementById("applicationForm").reset();
+});
+</script>
+
+</body>
+</html>
